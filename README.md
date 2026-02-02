@@ -1,6 +1,12 @@
-# TaskVault: Intelligent Result Caching for High-Compute Workflows
+# TaskVault — Cache smarter. Ship faster.
 
-**TaskVault** is an open-source, content-aware caching layer designed for engineering teams that perform repetitive computational work. It detects when the same task is being executed with identical or near-identical inputs and serves cached results instead—saving money, time, and infrastructure load.
+[![Test & Build](https://github.com/Usero0/taskvault/actions/workflows/test.yml/badge.svg)](https://github.com/Usero0/taskvault/actions/workflows/test.yml)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/Usero0/taskvault)](https://github.com/Usero0/taskvault)
+[![License](https://img.shields.io/github/license/Usero0/taskvault)](LICENSE)
+
+**TaskVault** is an open-source, content-aware caching layer for engineering teams running expensive, repeatable tasks. It fingerprints inputs, recognizes identical work, and serves cached results instantly—turning wasted compute into saved time, money, and infrastructure capacity.
+
+Think of it as a secure vault for deterministic work: if the input matches, the result is already waiting.
 
 ## 🎯 The Problem
 
