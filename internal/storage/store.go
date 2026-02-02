@@ -155,7 +155,9 @@ func (s *Store) Get(hash string) (*Entry, error) {
 	data, err := os.ReadFile(blobPath)
 	if err != nil {
 		// Blob missing but metadata exists - corrupted cache
-		s.Delete(hash)
+		if delErr := s.Delete(hash); delErr != nil {
+			return nil, fmt.Errorf("cannot delete corrupted entry: %w", delErr)
+		}
 		return nil, nil
 	}
 
@@ -166,7 +168,9 @@ func (s *Store) Get(hash string) (*Entry, error) {
 
 	// Update access time
 	updateStmt := `UPDATE cache_entries SET accessed_at = datetime('now') WHERE hash = ?`
-	s.db.Exec(updateStmt, hash)
+	if _, err := s.db.Exec(updateStmt, hash); err != nil {
+		return nil, fmt.Errorf("cannot update access time: %w", err)
+	}
 
 	expiresAtPtr := (*time.Time)(nil)
 	if expiresAt.Valid {
@@ -204,7 +208,9 @@ func (s *Store) Delete(hash string) error {
 	}
 
 	// Remove blob file
-	os.Remove(blobPath)
+	if err := os.Remove(blobPath); err != nil && !os.IsNotExist(err) {
+		return fmt.Errorf("cannot remove blob: %w", err)
+	}
 	return nil
 }
 

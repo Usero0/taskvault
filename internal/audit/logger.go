@@ -42,7 +42,9 @@ func (l *Logger) LogHit(operation, taskName, hash string) {
 		truncateHash(hash),
 	)
 
-	l.file.WriteString(entry)
+	if _, err := l.file.WriteString(entry); err != nil {
+		fmt.Fprintf(os.Stderr, "audit log write failed: %v\n", err)
+	}
 }
 
 // LogMiss records a cache miss
@@ -57,7 +59,9 @@ func (l *Logger) LogMiss(operation, taskName, hash string) {
 		truncateHash(hash),
 	)
 
-	l.file.WriteString(entry)
+	if _, err := l.file.WriteString(entry); err != nil {
+		fmt.Fprintf(os.Stderr, "audit log write failed: %v\n", err)
+	}
 }
 
 // LogError records an error
@@ -72,7 +76,9 @@ func (l *Logger) LogError(errorType, taskName string, err error) {
 		err,
 	)
 
-	l.file.WriteString(entry)
+	if _, err := l.file.WriteString(entry); err != nil {
+		fmt.Fprintf(os.Stderr, "audit log write failed: %v\n", err)
+	}
 }
 
 // truncateHash returns first 12 chars of hash for readability
