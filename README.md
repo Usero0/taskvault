@@ -401,15 +401,4 @@ TaskVault is MIT-licensed open-source. We welcome:
 
 MIT License - see LICENSE file for details.
 
----
-
-## 🆘 Support
-
-- **Docs**: [taskvault.dev](https://taskvault.dev)
-- **Issues**: [GitHub Issues](https://github.com/taskvault/taskvault/issues)
-- **Slack**: [Community Slack](https://taskvault-community.slack.com)
-- **Email**: support@taskvault.dev
-
----
-
 **Start caching now. Stop wasting compute.**
